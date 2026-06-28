@@ -36,6 +36,12 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('dev'));
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "TaskFlow Backend API is running 🚀",
+  });
+});
 // Apply rate limiting to all routes except AI
 app.use('/api', (req, res, next) => {
   if (req.path.startsWith('/tasks/suggest')) {
