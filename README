@@ -1,0 +1,187 @@
+📋 Overview
+TaskFlow is a modern, full-stack task and project management application that combines the power of the MERN stack with intelligent AI assistance. Built with a focus on user experience, it offers a seamless way to organize, track, and complete your tasks efficiently.
+
+Whether you're managing personal projects, collaborating with teams, or organizing your daily workflow, TaskFlow provides the tools you need to stay productive and organized.
+
+------------------------
+     Key Features
+------------------------
+🔐Authentication System
+User registration with name, email, and password
+Login with JWT token-based authentication
+Password hashing using bcryptjs
+Protected routes for authenticated users
+Logout functionality
+
+📊 Dashboard
+Display total tasks count
+Show completed tasks statistics
+Display in-progress tasks
+Show overdue tasks count
+Quick view of user's boards
+Board progress indicators
+Create new board button
+
+📋 Board Management
+Create new boards with title and description
+View all boards in a grid layout
+Edit board title and description
+Delete boards with confirmation
+Board progress tracking (task completion percentage)
+Task count per board
+Due this week task count
+
+✅ Task Management
+Create tasks with title, description, priority, due date, and effort estimate
+Three status columns: To Do, In Progress, Done
+Edit task details
+Delete tasks with confirmation
+Priority levels: Low, Medium, High (color-coded)
+Due date tracking with overdue indication
+Effort estimation in hours
+Task cards display: title, priority badge, due date, effort estimate
+
+🤖 AI Feature - Smart Estimation
+"Suggest Estimate" button on task creation
+Sends task title and description to Google Gemini API
+Returns suggested effort (in hours) and recommended due date
+Shows reasoning for the suggestion
+User can accept or reject the suggestion
+
+🎨 UI/UX Features
+Dark/Light Mode Toggle with persisted preference
+Responsive Design - Works on mobile, tablet, and desktop
+Clean Sidebar Navigation with icons
+Modern Card-based Layout
+Smooth Animations using Framer Motion
+
+
+🛠️ Tech Stack Used
+-->Frontend
+Technology	          Purpose
+React	              UI Library
+Vite	              Build Tool
+Tailwind CSS	      Styling
+React Router DOM      Navigation
+React Query	Server    State Management
+Lucide React          Icons
+Framer Motion	      Animations
+Recharts	          Charts
+React Hot Toast	      Notifications
+Axios	              HTTP Client
+
+-->Backend
+Technology	          Purpose
+Node.js	              JavaScript Runtime
+Express               API Server
+MongoDB	              NoSQL Database
+Mongoose	          MongoDB ODM
+JWT	                  Authentication
+bcryptjs	          Password Hashing
+Helmet	              Security Headers
+CORS	              Cross-Origin Resource Sharing
+Morgan	              HTTP Logging
+Compression	          Response Compression
+Express Rate Limit	  API Rate Limiting
+dotenv	              Environment Variables
+
+-->AI Integration
+Technology	          Purpose
+Google Gemini API	  AI-Powered Task Estimation
+Axios	              HTTP Client
+
+📁 Project Structure
+taskflow/
+├── server/                      # Backend
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── database.js     # MongoDB connection
+│   │   │   └── constants.js    # App constants (status, priority)
+│   │   ├── models/
+│   │   │   ├── User.js         # User schema with bcrypt hashing
+│   │   │   ├── Board.js        # Board schema with owner reference
+│   │   │   └── Task.js         # Task schema with status, priority
+│   │   ├── controllers/
+│   │   │   ├── authController.js    # Register, login, getMe
+│   │   │   ├── boardController.js   # CRUD operations for boards
+│   │   │   └── taskController.js    # CRUD + AI suggestion
+│   │   ├── routes/
+│   │   │   ├── authRoutes.js        # /api/auth endpoints
+│   │   │   ├── boardRoutes.js       # /api/boards endpoints
+│   │   │   └── taskRoutes.js        # /api/tasks endpoints
+│   │   ├── middleware/
+│   │   │   ├── auth.js         # JWT verification middleware
+│   │   │   └── errorHandler.js # Global error handling
+│   │   ├── ai/
+│   │   │   └── geminiService.js # Google Gemini API integration
+│   │   └── server.js           # Main server file
+│   ├── .env.example            # Environment variables template
+│   └── package.json            # Backend dependencies
+│
+├── client/                      # Frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Layout/
+│   │   │   │   ├── Layout.jsx      # Main layout wrapper
+│   │   │   │   ├── Sidebar.jsx     # Navigation sidebar
+│   │   │   │   └── Header.jsx      # Top header with user info
+│   │   │   ├── TaskCard.jsx        # Task card with drag handle
+│   │   │   ├── TaskModal.jsx       # Create/Edit task modal
+│   │   │   └── AISuggestionModal.jsx # AI suggestion modal
+│   │   ├── pages/
+│   │   │   ├── Login.jsx           # Login page
+│   │   │   ├── Register.jsx        # Registration page
+│   │   │   ├── Dashboard.jsx       # Dashboard with stats
+│   │   │   ├── Boards.jsx          # Boards management page
+│   │   │   └── BoardDetail.jsx     # Board view with tasks
+│   │   ├── services/
+│   │   │   ├── api.js              # Axios client with interceptors
+│   │   │   ├── authService.js      # Auth API calls
+│   │   │   ├── boardService.js     # Board API calls
+│   │   │   └── taskService.js      # Task API calls
+│   │   ├── context/
+│   │   │   ├── AuthContext.jsx     # Authentication state
+│   │   │   └── ThemeContext.jsx    # Dark/Light mode state
+│   │   ├── App.jsx                 # Main app with routing
+│   │   ├── main.jsx                # Entry point
+│   │   └── index.css               # Global styles with Tailwind
+│   ├── .env.example
+│   ├── package.json
+│   └── tailwind.config.js
+│
+├── .gitignore
+└── README.md
+
+
+📡 API Endpoints Implemented
+--Authentication Routes
+Method	Endpoint	Description
+POST	/api/auth/register	Register new user
+POST	/api/auth/login	Login user
+GET	/api/auth/me	Get current user (Protected)
+PUT	/api/auth/preferences	Update user preferences (Protected)
+
+--Board Routes (Protected)
+Method	Endpoint	Description
+GET	/api/boards	Get all boards with task counts
+POST	/api/boards	Create new board
+PUT	/api/boards/:id	Update board
+DELETE	/api/boards/:id	Delete board and its tasks
+
+--Task Routes (Protected)
+Method	Endpoint	Description
+GET	/api/tasks/board/:boardId	Get tasks by board
+POST	/api/tasks	Create new task
+PUT	/api/tasks/:id	Update task
+DELETE	/api/tasks/:id	Delete task
+POST	/api/tasks/suggest	Get AI suggestion
+
+-->Deploy link
+FRontend -  taskflow-ai-backendd-frontend.netlify.app
+BAckend -https://taskflow-ai-backendd.onrender.com
+
+👤 Developer
+Name: Kiran Kumari
+Role: Full Stack Developer
+Project: TaskFlow Assignment
+
