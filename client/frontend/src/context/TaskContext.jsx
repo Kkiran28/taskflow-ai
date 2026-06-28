@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { taskService } from '../services/taskService';
 import { boardService } from '../services/boardService';
+import { useAuth } from './AuthContext';
 
 const TaskContext = createContext();
 
@@ -13,6 +14,7 @@ export const useTasks = () => {
 };
 
 export const TaskProvider = ({ children }) => {
+  const { isAuthenticated } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -126,8 +128,14 @@ export const TaskProvider = ({ children }) => {
 
   // Initial load
   useEffect(() => {
-    fetchAllTasks();
-  }, []);
+    if (isAuthenticated) {
+      fetchAllTasks();
+    } else {
+      setTasks([]);
+      setBoards([]);
+      setLoading(false);
+    }
+  }, [isAuthenticated]);
 
   return (
     <TaskContext.Provider value={{
